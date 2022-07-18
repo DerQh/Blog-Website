@@ -1,7 +1,7 @@
 {% include "header.html" %}
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1470092306007-055b6797ca72?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80')">
+  <header class="masthead" style="background-image: url({{url_for('static', filename='img/header.jpg') }})">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -9,8 +9,8 @@
           <div class="site-heading">
             
             {% if not current_user.is_authenticated: %}
-            <h1>Fred's Blog</h1>
-            <span class="subheading">A collection of random musings.</span>
+            <h1>DerQh Blog</h1>
+            <span class="subheading">Join the World in Creating Happiness .</span>
             {% else%}
             <h1>{{ current_user.name }}'s Blog</h1>
             <span class="subheading"> Welcome to the Blog.</span>
