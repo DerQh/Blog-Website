@@ -32,7 +32,7 @@
         {{ post.body|safe }}
         <hr />
 
-        {%if current_user.is_authenticated}
+        {%if current_user.name == post.author.name%}
         <div class="clearfix">
           <a
             class="btn btn-primary float-right"

@@ -38,7 +38,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function( *args, **kwargs):
         #if id is not 1 then return with abort error 
-        if current_user.id != 1:
+        if not current_user.is_authenticated :
             return abort(403)
         #otherwise continue with the route function 
         return f(*args, **kwargs)
@@ -189,9 +189,10 @@ def contact():
     return render_template("contact.html",current_user = current_user)
 
 
-@app.route("/new-post", methods=['POST', 'GET'])
+@app.route("/new-post/<int:user_id>", methods=['POST', 'GET'])
 @login_required
-def add_new_post():
+def add_new_post(user_id):
+    user = User.query.get(user_id)
     form = CreatePostForm()
     if form.validate_on_submit():
         new_post = BlogPost(
@@ -199,7 +200,7 @@ def add_new_post():
             subtitle=form.subtitle.data,
             body=form.body.data,
             img_url=form.img_url.data,
-            author=current_user,
+            author=current_user ,
             date=date.today().strftime("%B %d, %Y")
         )
         db.session.add(new_post)

@@ -14,7 +14,7 @@
             {% else%}
             <h1>{{ current_user.name }}'s Blog</h1>
             <span class="subheading"> Welcome to the Blog.</span>
-            {% endif %}
+            {% endif %} 
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
           <p class="post-meta">Posted by
             <a href="#">{{post.author.name}}</a>
             on {{post.date}}
-          {%if current_user.id == 1%}
+          {%if current_user.name == post.author.name%}
             <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
           {% endif %}
           </p>
@@ -49,8 +49,8 @@
 
         <!-- New Post -->
         <div class="clearfix">
-          {%if current_user.is_authenticated}
-          <a class="btn btn-primary float-right" href="{{url_for('add_new_post')}}">Create New Post</a>
+          {% if current_user.is_authenticated: %}
+          <a class="btn btn-primary float-right" href="{{url_for('add_new_post', user_id = current_user.id)}}">Create New Post</a>
           {% endif %}
         </div>
       </div>
